@@ -348,7 +348,7 @@ setupSmartListener()
 delayedInitialTranslate()
 
 local success, err = pcall(function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/ATrainz/Phantasm/refs/heads/main/Games/TSB.lua"))()
+    loadstring(game:HttpGet("https://gh-proxy.com/https://raw.githubusercontent.com/ATrainz/Phantasm/refs/heads/main/Games/TSB.lua"))()
 if not success then
     warn("加载失败:", err)
 end
