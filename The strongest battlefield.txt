@@ -3,6 +3,7 @@ local Translations = {
     ["Phantasm"] = "TSB最强战场晓林汉化",
     ["Toggle"] = "切换显示",
     ["Lock"] = "锁定面板",
+    ["Unlock"] = "解锁面板",
     ["Information"] = "信息",
     ["Local Player"] = "本地玩家",
     ["Exploits"] = "功能/外挂",
