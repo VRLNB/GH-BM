@@ -1,4 +1,3 @@
---认准qq群聊晓林739736672汉化
 local Translations = {
     ["Phantasm"] = "TSB最强战场晓林汉化",
     ["Toggle"] = "切换显示",
@@ -23,7 +22,7 @@ local Translations = {
     ["- R6 Boogie Down"] = "- R6 摇摆舞蹈",
     ["Fixed Chat Flooder (new roblox chat"] = "修复了刷屏器（适配新版Roblox聊天）",
     ["Old test version, Do not expect updates."] = "旧测试版本，不保证更新晓林NB✅️。",
-    ["discord.gg/phantasm"] = "官方Discord：discord.gg/phantasm",
+    ["discord.gg/phantasm"] = "QQ群聊739736672",
     ["Movement"] = "移动",
     ["Character"] = "角色",
     ["Automation"] = "自动功能",
