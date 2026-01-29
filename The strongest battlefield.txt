@@ -1,71 +1,354 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+--认准qq群聊晓林739736672汉化
+local Translations = {
+    ["Phantasm"] = "TSB最强战场晓林汉化",
+    ["Toggle"] = "切换显示",
+    ["Lock"] = "锁定面板",
+    ["Information"] = "信息",
+    ["Local Player"] = "本地玩家",
+    ["Exploits"] = "功能/外挂",
+    ["Visuals"] = "视觉效果",
+    ["Commands"] = "指令",
+    ["Map"] = "地图",
+    ["Loading UI"] = "加载界面",
+    ["Search"] = "搜索",
+    ["Update Log"] = "更新日志",
+    ["Phantasm works on xeno now"] = "幻象现在支持Xeno执行器",
+    ["Idle Animations"] = "待机动画",
+    ["- End Fade Time"] = "- 结束淡出时间",
+    ["Run Animations"] = "跑步动画",
+    ["- Implemented"] = "- 已实现",
+    ["- + Start Fade Time"] = "- + 开始淡出时间",
+    ["Block Animations"] = "格挡动画",
+    ["Looped Animation"] = "循环动画",
+    ["- R6 Boogie Down"] = "- R6 摇摆舞蹈",
+    ["Fixed Chat Flooder (new roblox chat"] = "修复了刷屏器（适配新版Roblox聊天）",
+    ["Old test version, Do not expect updates."] = "旧测试版本，不保证更新晓林NB✅️。",
+    ["discord.gg/phantasm"] = "官方Discord：discord.gg/phantasm",
+    ["Movement"] = "移动",
+    ["Character"] = "角色",
+    ["Automation"] = "自动功能",
+    ["Speed Hack Enabled"] = "加速功能 开启",
+    ["Speed:"] = "速度:",
+    ["Speed Hack Method"] = "加速方式",
+    ["CFrame"] = "坐标位移",
+    ["Upside Down"] = "倒置模式",
+    ["Auto Frozen Soul"] = "自动冻结灵魂",
+    ["Free Stargazer / Nightchild"] = "免费观星者/夜之子",
+    ["Dashes"] = "冲刺",
+    ["Custom Front Dash"] = "自定义前冲",
+    ["Front Dash Distance"] = "前冲距离",
+    ["Fly"] = "飞行",
+    ["Fly Speed"] = "飞行速度",
+    ["Fly Rotations"] = "飞行旋转",
+    ["Anime Teleportation"] = "动漫式传送",
+    ["Teleport Animation"] = "传送动画",
+    ["Teleport Sound"] = "传送音效",
+    ["None"] = "无",
+    ["Custom Side Dash"] = "自定义侧冲",
+    ["Side Dash Distance (Multiplier)"] = "侧冲距离（倍率）",
+    ["Side Dash Speed"] = "侧冲速度",
+    ["Custom Back Dash"] = "自定义后冲",
+    ["Back Dash Distance (Multiplier)"] = "后冲距离（倍率）",
+    ["Reset to Defaults"] = "恢复默认设置",
+    ["Sound Volume"] = "音量",
+    ["Animation Speed"] = "动画速度",
+    ["Lock-on"] = "自动锁定",
+    ["Prediction:"] = "预测值:",
+    ["Auto Prediction"] = "自动预测",
+    ["Orbit"] = "环绕模式",
+    ["Orbit Speed"] = "环绕速度",
+    ["Velocity Spoof"] = "速度模拟",
+    ["Teleport 1"] = "传送点1",
+    ["Teleport 2"] = "传送点2",
+    ["Main"] = "主功能",
+    ["Wall Combo"] = "壁击连段",
+    ["Trashcan Launch"] = "垃圾桶抛射",
+    ["Launch Power"] = "抛射力度",
+    ["Skill Bring"] = "技能牵引",
+    ["TP Back on Bring"] = "牵引后传送回原位",
+    ["Skill Bring Area"] = "技能牵引范围",
+    ["Death Counter"] = "死亡计数器",
+    ["Wall Combo Anywhere"] = "任意位置触发壁击",
+    ["Auto Wall Combo"] = "自动壁击连段",
+    ["Disabled"] = "已禁用",
+    ["Teleport Back"] = "传送返回",
+    ["Area"] = "区域",
+    ["Teleport To Area"] = "传送到指定区域",
+    ["Goto"] = "前往",
+    ["Back"] = "返回",
+    ["Attack All"] = "攻击全部",
+    ["Skill Throw"] = "技能投掷",
+    ["No Windstorm Fury BP"] = "飓风狂怒无需能量",
+    ["No Tatsumaki Ult BP"] = "龙卷终极技能无需能量",
+    ["Invisible Moves"] = "隐身招式",
+    ["Toggle All On"] = "全部开启",
+    ["Toggle All Off"] = "全部关闭",
+    ["Invisible Block"] = "隐身格挡",
+    ["Block Color"] = "格挡颜色",
+    ["Invisible Counter"] = "隐身反击",
+    ["Invisible Counter Hit"] = "隐身反击命中",
+    ["Invisible Saitama"] = "隐身琦玉",
+    ["No Prey's Peril BP"] = "猎物危机无需能量",
+    ["Fling On Death"] = "死亡时击飞",
+    ["Anti's"] = "反制功能",
+    ["Anti Fling"] = "防击飞",
+    ["Anti Invisibility"] = "反隐身",
+    ["Backdash Cancel"] = "后冲取消",
+    ["Anti Trash Can"] = "防垃圾桶抛射",
+    ["Invisible Garou"] = "隐身饿狼",
+    ["Invisible Speed-o'-Sonic"] = "隐身音速索尼克",
+    ["Invisible Genos"] = "隐身杰诺斯",
+    ["Invisible Tatsumaki"] = "隐身龙卷",
+    ["Anti Saitama"] = "反琦玉",
+    ["Anti Garou"] = "反饿狼",
+    ["Anti Genos"] = "反杰诺斯",
+    ["Anti Tatsumaki"] = "反龙卷",
+    ["Anti Atomic Samurai"] = "反原子武士",
+    ["Anti Suiryu"] = "反水龙",
+    ["Anti Metal Bat"] = "反金属球棒",
+    ["Anti Speed-o'-Sonic"] = "反音速索尼克",
+    ["Anti KJ"] = "反KING",
+    ["Invisible Atomic Samurai"] = "隐身原子武士",
+    ["Invisible Metal Bat"] = "隐身金属球棒",
+    ["Invisible Suiryu"] = "隐身水龙",
+    ["ESP"] = "透视",
+    ["Show Death Counter"] = "显示死亡计数器",
+    ["Move Notifications"] = "招式通知",
+    ["Expose Move In Chat"] = "聊天显示招式",
+    ["Expose Whitelisted Players"] = "显示白名单玩家",
+    ["Moves"] = "招式",
+    ["Box ESP"] = "方框透视",
+    ["Rainbow Box"] = "彩虹方框",
+    ["Box Thickness:"] = "方框厚度:",
+    ["Box Transparency:"] = "方框透明度:",
+    ["Face Camera"] = "面向镜头",
+    ["Tracers"] = "线条透视",
+    ["Rainbow Tracers"] = "彩虹线条",
+    ["Tracer Thickness:"] = "线条厚度:",
+    ["Tracer Transparency:"] = "线条透明度:",
+    ["Unlock Tracers"] = "解锁线条透视",
+    ["World"] = "世界",
+    ["No Walls"] = "无墙壁",
+    ["No Trees"] = "无树木",
+    ["No Debris"] = "无残骸",
+    ["No Smoke"] = "无烟雾",
+    ["No Explosions"] = "无爆炸",
+    ["Ambient Enabled"] = "环境光开启",
+    ["Rainbow Ambient"] = "彩虹环境光",
+    ["Settings"] = "设置",
+    ["Command Bar"] = "指令栏",
+    ["Semicolon"] = "分号",
+    ["Use Commands in Chat"] = "在聊天中使用指令",
+    ["Send Command In Chat"] = "发送指令到聊天",
+    ["Fling Type"] = "击飞类型",
+    ["Void"] = "虚空",
+    ["Fling Speed:"] = "击飞速度:",
+    ["Fling Timeout:"] = "击飞超时:",
+    ["Teleports"] = "传送点",
+    ["Above Tunnel"] = "隧道上方",
+    ["Arena"] = "竞技场",
+    ["Atomic Slash"] = "原子斩",
+    ["Baseplate"] = "地基",
+    ["Below Baseplate"] = "地基下方",
+    ["Bigger Jail"] = "大监狱",
+    ["Dark Domain"] = "黑暗领域",
+    ["Even Bigger Jail"] = "超大监狱",
+    ["Jail"] = "监狱",
+    ["Jail But Smaller"] = "小监狱",
+    ["Middle"] = "中央",
+    ["Mountain 1"] = "山脉1",
+    ["Mountain 2"] = "山脉2",
+    ["Mountain Edge"] = "山脉边缘",
+    ["Players"] = "玩家",
+    ["Target"] = "目标",
+    ["Disguise"] = "伪装"
+    ["Miscallenous"] = "杂项",
+    ["UI Settings"] = "界面设置",
+    ["Anti Ban"] = "防封禁",
+    ["Staff Detector"] = "管理员检测",
+    ["Check Group"] = "检查群组",
+    ["Check Friends"] = "检查好友",
+    ["Anticheat Flags:"] = "反作弊标记:",
+    ["A1: Report"] = "A1: 举报",
+    ["A2: Animation"] = "A2: 动画",
+    ["A3: Remote Event"] = "A3: 远程事件",
+    ["Animations"] = "动画",
+    ["Idle Animation"] = "待机动画",
+    ["Normal"] = "正常",
+    ["Idle Animation End Fade Time"] = "待机动画结束淡出时间",
+    ["Run Animation"] = "跑步动画",
+    ["Run Animation Speed"] = "跑步动画速度",
+    ["Run Animation Start Fade Time"] = "跑步动画开始淡出时间",
+    ["Run Animation End Fade Time"] = "跑步动画结束淡出时间",
+    ["Block Animation"] = "格挡动画",
+    ["Block Animation End Fade Time"] = "格挡动画结束淡出时间",
+    ["Looped Animation"] = "循环动画",
+    ["None"] = "无",
+    ["Anticheat Detector"] = "反作弊检测",
+    ["Avoid Ban Method"] = "防封禁方式",
+    ["Rejoin Delay"] = "重进延迟",
+    ["Scripts"] = "脚本",
+    ["Infinite Yield"] = "无限指令",
+    ["Remote Spy"] = "远程监听",
+    ["Kade Gojo V1"] = "Kade 五条悟 V1",
+    ["Kade Gojo V2 (Morph)"] = "Kade 五条悟 V2（变形）",
+    ["Kade Gojo V2 (No Morph)"] = "Kade 五条悟 V2（不变形）",
+    ["Saitama Overhaul"] = "琦玉重做",
+    ["KadeJ / KaitamaJ"] = "KadeJ / 凯玉J",
+    ["Dragon Ball Super Hit (Morph)"] = "龙珠超 希特（变形）",
+    ["Dragon Ball Super Hit (No Morph)"] = "龙珠超 希特（不变形）",
+    ["Dark Dex V3"] = "暗黑 Dex V3",
+    ["Bypassed Dark Dex V3"] = "绕过检测 暗黑 Dex V3",
+    ["Credits:"] = "致谢:",
+    ["(discord tags)"] = "（Discord标签）",
+    ["Kade's Scripts:"] = "Kade 的脚本:",
+    ["Kiosk's Scripts:"] = "Kiosk 的脚本:",
+    ["Knockoff Free Emotes"] = "免费仿冒表情",
+    ["Free Emote Search Bar"] = "免费表情搜索栏",
+    ["Free 8 Emote Slots"] = "免费8个表情槽位",
+    ["Free Emote Page"] = "免费表情页面",
+    ["Total Emotes:"] = "总表情数:",
+    ["Disable Messaging"] = "禁用消息",
+    ["Anti Chat Logger"] = "防聊天记录",
+    ["Chat Flooder"] = "聊天刷屏",
+    ["Chat Flooder Delay"] = "聊天刷屏延迟",
+    ["Animation Speed"] = "动画速度",
+    ["Fucked Up Character"] = "角色异常修复",
+    ["No Trashcan Hold"] = "禁止垃圾桶抓取",
+    ["Disable Intro"] = "禁用开场动画",
+    ["Extra"] = "额外功能",
+    ["Auto Emote Spin"] = "自动表情旋转",
+    ["Right"] = "右侧",
+    ["DPI Scale"] = "DPI 缩放",
+    ["Menu Bind"] = "菜单快捷键",
+    ["RightControl"] = "右Ctrl键",
+    ["Unload"] = "卸载",
+    ["Rejoin"] = "重新加入",
+    ["Themes"] = "主题",
+    ["Background color"] = "背景颜色",
+    ["Main color"] = "主颜色",
+    ["Accent color"] = "强调色",
+    ["Outline color"] = "边框颜色",
+    ["Font color"] = "字体颜色",
+    ["Font Face"] = "字体",
+    ["Code"] = "代码体",
+    ["Theme list"] = "主题列表",
+    ["Default"] = "默认",
+    ["Set as default"] = "设为默认",
+    ["Custom theme name"] = "自定义主题名称",
+    ["Create theme"] = "创建主题",
+    ["Custom themes"] = "自定义主题",
+    ["Load theme"] = "加载主题",
+    ["Overwrite theme"] = "覆盖主题",
+    ["Delete theme"] = "删除主题",
+    ["Refresh list"] = "刷新列表",
+    ["Reset default"] = "重置默认",
+    ["Settings"] = "设置",
+    ["Unlock Mouse"] = "解锁鼠标",
+    ["Menu"] = "菜单",
+    ["Open Keybind Menu"] = "打开快捷键菜单",
+    ["Show Untoggled Keybinds"] = "显示未启用快捷键",
+    ["Custom Cursor"] = "自定义光标",
+    ["Notification Side"] = "通知位置",
+    ["Configuration"] = "配置",
+    ["Config name"] = "配置名称",
+    ["Create config"] = "创建配置",
+    ["Config list"] = "配置列表",
+    ["Load config"] = "加载配置",
+    ["Overwrite config"] = "覆盖配置",
+    ["Delete config"] = "删除配置",
+    ["Set as autoload"] = "设为自动加载",
+    ["Reset autoload"] = "重置自动加载",
+    ["Current autoload config: none"] = "当前自动加载配置: 无"    
+}
 
-]]--
-
--- Example Code:
-local a = ((16164 + (((3864 + 364101) - 274396) - 67600)) + (190952 - 110638))
-a = a + ((113 - (26 + 67)) + (1219 - (119 + 997))) -- Example obfuscation
-
--- To hide your precious values, try obfuscating them!
--- Click the [Literals] button in the upper-right corner
-local b = 1203456
-local c = 1230471
-local d = 8023481
-
--- The below if-statement is opque and can be predicted as
--- all conditions are staticly defined
-if c > b then
-    print("true")
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    if Translations[text] then return Translations[text] end
+    for en, cn in pairs(Translations) do
+        if text:find(en) then return text:gsub(en, cn) end
+    end
+    return text
 end
 
--- You may want to obfuscate such if-statements by using
--- the [Junk-If] button in the upper right corner
-if 1 + d > c then
-    print("obfuscate the conditions!")
+local translatedElements = {}
+local originalTexts = {}
+
+local function safeTranslateElement(element)
+    if translatedElements[element] then return end
+    pcall(function()
+        if element:IsA("TextLabel") or element:IsA("TextButton") or element:IsA("TextBox") then
+            local currentText = element.Text
+            if currentText and currentText ~= "" then
+                if not originalTexts[element] then
+                    originalTexts[element] = currentText
+                end
+                local translatedText = translateText(currentText)
+                if translatedText ~= currentText then
+                    element.Text = translatedText
+                    translatedElements[element] = true
+                end
+            end
+        end
+    end)
 end
 
--- Next is [Strings], which will encrypt all strings but adds
--- extra code to decrypt them at runtime.
-print("Clicking [Strings] will completely hide this string!")
+local function setupSmartListener()
+    local function onTextPropertyChanged(element)
+        if translatedElements[element] then
+            local currentText = element.Text
+            local originalText = originalTexts[element]
+            if currentText == originalText or translateText(currentText) == currentText then
+                translatedElements[element] = nil
+                return
+            end
+            local translatedText = translateText(currentText)
+            if translatedText ~= currentText then
+                element.Text = translatedText
+            end
+        else
+            safeTranslateElement(element)
+        end
+    end
 
--- Another important thing is to hide the order of things that get executed
--- to confuse an attacker using Control Flow Flattening. With [CFF v1] we can hide
--- the control flow of the following blocks.
-do
-   function sieve_of_eratosthenes(n)
-   local is_prime = { }
-       for i = 1, n do
-           is_prime[i] = 1 ~= i
-       end
-       for i = 2, math.floor(math.sqrt(n)) do
-           if is_prime[i] then
-               for j = i* i, n, i do
-                   is_prime[j] = false
-               end
-           end
-       end
-       return is_prime
-   end
-   local primes = sieve_of_eratosthenes(420)
-   for key, value in pairs(primes) do
-       if (value) then
-           print("Prime found: " .. key)
-       end
-   end
+    local function addSmartListener(parent)
+        parent.DescendantAdded:Connect(function(descendant)
+            task.wait(0.3)
+            safeTranslateElement(descendant)
+            if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                descendant:GetPropertyChangedSignal("Text"):Connect(function()
+                    task.wait(0.1)
+                    onTextPropertyChanged(descendant)
+                end)
+            end
+        end)
+    end
+    pcall(addSmartListener, game:GetService("CoreGui"))
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        pcall(addSmartListener, player.PlayerGui)
+    end
 end
 
--- You might be satisfied with your result, but before sharing your work you should
--- use [Minify] (under Miscellaneous) to destroy all local variables and comments.
--- Please note that some pre-configured obfuscate buttons already do this for you ;)
-print("How to obfuscate best?")
+local function delayedInitialTranslate()
+    task.wait(5)
+    for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+        safeTranslateElement(gui)
+    end
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+            safeTranslateElement(gui)
+        end
+    end
+end
 
--- The highest level of obfuscation is done through virtualization,
--- in our case this means we will be running Lua inside Lua using the
--- Ironbrew2 virtulization tool. Ready? click [Demo VM] and see what happens!
+task.wait(2)
+setupSmartListener()
+delayedInitialTranslate()
+
+local success, err = pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/ATrainz/Phantasm/refs/heads/main/Games/TSB.lua"))()
+if not success then
+    warn("加载失败:", err)
+end
