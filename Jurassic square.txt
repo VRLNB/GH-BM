@@ -1,0 +1,140 @@
+local Translations = {
+    ["Rayfield"] = "少羽nb",
+    ["KaylaHub Key System"] = "凯拉辅助面板密钥系统",
+    ["Enter your key"] = "输入你的密钥",
+    ["Key"] = "密钥",
+    ["Note"] = "提示",
+    ["Join our discord for key"] = "卡密TigasW",
+    ["KaylaHub"] = "MIMI晓林汉化",
+    ["Main"] = "主功能",
+    ["AutoFarm"] = "自动刷取",
+    ["Combat"] = "战斗",
+    ["OP"] = "超强功能",
+    ["Rage"] = "仇恨/追猎",
+    ["Settings"] = "设置",
+    ["leave feedback"] = "提交反馈",
+    ["Spawn as Goat"] = "生成为山羊",
+    ["Anti-AFK"] = "防挂机",
+    ["FPS Boost"] = "帧率提升",
+    ["Goated ?"] = "已解锁山羊特权",
+    ["Amber AutoFarm"] = "自动刷琥珀",
+    ["AutoFarm Goats"] = "自动刷山羊",
+    ["Autofarm Presents"] = "自动刷礼物",
+    ["Enjoy"] = "祝您使用愉快",
+    ["ESP"] = "显示实体轮廓",
+    ["Speed"] = "速度",
+    ["+"] = "增加",
+    ["-"] = "减少",
+    ["Inf Stamina"] = "无限体力",
+    ["OPP??"] = "超强模式",
+    ["Adjust hitbox"] = "调整判定范围",
+    ["120 y"] = "120码",
+    ["OP Beat D-Rex"] = "传送击杀畸王龙",
+    ["Make them leave"] = "强制对方离开",
+    ["Target Player"] = "选择传送的玩家",
+    ["Adjust for hitbox"] = "适配判定范围",
+    ["100 y"] = "100码",
+    ["Target"] = "锁定目标",
+    ["join our discord"] = "加入我们的Discord服务器",
+    ["Toggle UI"] = "切换界面显示",
+    ["Server Hop"] = "切换服务器",
+    ["Rejoin"] = "重新加入",
+    ["Interface Hidden"] = "界面已隐藏",
+    ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，点击“显示”可重新调出"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    return Translations[text] or text
+end
+
+local translatedElements = {}
+local originalTexts = {}
+
+local function safeTranslateElement(element)
+    if translatedElements[element] then return end
+    pcall(function()
+        if element:IsA("TextLabel") or element:IsA("TextButton") or element:IsA("TextBox") then
+            local currentText = element.Text
+            if currentText and currentText ~= "" then
+                if not originalTexts[element] then
+                    originalTexts[element] = currentText
+                end
+                local translatedText = translateText(currentText)
+                if translatedText ~= currentText then
+                    element.Text = translatedText
+                    translatedElements[element] = true
+                end
+            end
+        end
+    end)
+end
+
+local function setupSmartListener()
+    local function onTextPropertyChanged(element)
+        if translatedElements[element] then
+            local currentText = element.Text
+            local originalText = originalTexts[element]
+            if currentText == originalText or translateText(currentText) == currentText then
+                translatedElements[element] = nil
+                return
+            end
+            local translatedText = translateText(currentText)
+            if translatedText ~= currentText then
+                element.Text = translatedText
+            end
+        else
+            safeTranslateElement(element)
+        end
+    end
+
+    local function addSmartListener(parent)
+        parent.DescendantAdded:Connect(function(descendant)
+            task.wait(0.01)
+            safeTranslateElement(descendant)
+            if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                descendant:GetPropertyChangedSignal("Text"):Connect(function()
+                    task.wait(0.01)
+                    onTextPropertyChanged(descendant)
+                end)
+            end
+        end)
+    end
+
+    pcall(addSmartListener, game:GetService("CoreGui"))
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        pcall(addSmartListener, player.PlayerGui)
+    end
+end
+
+local function delayedInitialTranslate()
+    task.wait(1)
+    for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+        safeTranslateElement(gui)
+    end
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+            safeTranslateElement(gui)
+        end
+    end
+end
+
+task.spawn(function()
+    while true do
+        task.wait(3)
+        delayedInitialTranslate()
+    end
+end)
+
+task.wait(2)
+setupSmartListener()
+delayedInitialTranslate()
+
+local success, err = pcall(function()
+    loadstring(game:HttpGet("https://api.junkie-development.de/api/v1/luascripts/public/2e68f08a051f7679f7e2cb94b563421757144fc7f3e510c40408ab5c243e2620/download"))()
+end)
+if not success then
+    warn("加载失败:", err)
+end
