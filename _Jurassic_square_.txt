@@ -4,7 +4,6 @@ local Translations = {
     ["Enter your key"] = "输入你的密钥",
     ["Key"] = "密钥",
     ["Note"] = "提示",
-    ["Show Rayfield"] = "中国人MIMI儿子",
     ["Join our discord for key"] = "中国人我儿子😋卡密TigasW",
     ["KaylaHub"] = "MIMI晓林汉化jur.7891群员都是我儿子😋",
     ["Main"] = "主功能",
@@ -41,7 +40,8 @@ local Translations = {
     ["Server Hop"] = "切换服务器",
     ["Rejoin"] = "重新加入",
     ["Interface Hidden"] = "界面已隐藏",
-    ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，点击“显示”可重新调出"
+    ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，点击“显示”可重新调出",
+    ["Show Rayfield"] = "中国人MIMI儿子"
 }
 
 local function translateText(text)
