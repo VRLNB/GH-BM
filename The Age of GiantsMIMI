@@ -1,5 +1,6 @@
 local Translations = {
-    ["Radium Age of Titans"] = "MIMI 巨人时代",
+    ["Radium"] = "MIMI",
+    ["Age ofTitans"] = "巨人时代",
     ["Main"] = "主要功能",
     ["Skin Changer"] = "皮肤更换器",
     ["Evolved Godzilla Skins"] = "进化哥斯拉皮肤",
