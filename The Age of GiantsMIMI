@@ -1,0 +1,232 @@
+local Translations = {
+    ["Radium Age of Titans"] = "MIMI 巨人时代",
+    ["Main"] = "主要功能",
+    ["Skin Changer"] = "皮肤更换器",
+    ["Evolved Godzilla Skins"] = "进化哥斯拉皮肤",
+    ["Amythest Godzilla"] = "紫水晶哥斯拉",
+    ["Shimo Godzilla"] = "霜魔哥斯拉",
+    ["Supercharged Godzilla"] = "超充能哥斯拉",
+    ["Thermo Godzilla"] = "热力哥斯拉",
+    ["Bald Godzilla"] = "光头哥斯拉",
+    ["Diamond Godzilla"] = "钻石哥斯拉",
+    ["Space Godzilla"] = "太空哥斯拉",
+    ["Obsidian Godzilla"] = "黑曜石哥斯拉",
+    ["Ruby Godzilla"] = "红宝石哥斯拉",
+    ["Amythest Shimo Godzilla"] = "紫水晶霜魔哥斯拉",
+    ["Dagon Skins"] = "达贡皮肤",
+    ["2000 Dagon"] = "2000版达贡",
+    ["Adam Dagon"] = "亚当达贡",
+    ["Agama Dagon"] = "阿伽玛达贡",
+    ["Bald Dagon"] = "光头达贡",
+    ["Classic Dagon"] = "经典达贡",
+    ["Frostbite Dagon"] = "霜咬达贡",
+    ["Iguana Dagon"] = "鬣蜥达贡",
+    ["Mahogany Dagon"] = "桃花心木达贡",
+    ["Snake Dagon"] = "蛇纹达贡",
+    ["Shimo Skins"] = "霜魔皮肤",
+    ["Default"] = "默认",
+    ["Amythest Shimo"] = "紫水晶霜魔",
+    ["Diamond Shimo"] = "钻石霜魔",
+    ["Shimo"] = "霜魔",
+    ["Bald Shimo"] = "光头霜魔",
+    ["Obsidian Shimo"] = "黑曜石霜魔",
+    ["Ruby Shimo"] = "红宝石霜魔",
+    ["Kong Skins"] = "金刚皮肤",
+    ["Rampage Kong"] = "狂暴金刚",
+    ["Show Kong"] = "昭和金刚",
+    ["Suko Kong"] = "苏可金刚",
+    ["Beast Kong"] = "野兽金刚",
+    ["KJ Kong"] = "KJ金刚",
+    ["Test Skin Kong"] = "测试皮肤金刚",
+    ["2021 Kong"] = "2021版金刚",
+    ["Godzilla 2014 Skins"] = "2014版哥斯拉皮肤",
+    ["2000 Legendary 2014"] = "2000传奇2014",
+    ["Agama Legendary 2014"] = "阿伽玛传奇2014",
+    ["Bald Legendary 2014"] = "光头传奇2014",
+    ["Bobby Legendary 2014"] = "鲍比传奇2014",
+    ["Cetacean Legendary 2014"] = "鲸类传奇2014",
+    ["Dead Ringer Legendary 2014"] = "死亡回响传奇2014",
+    ["Ghidorah Stan64 Legendary 2014"] = "基多拉Stan64传奇2014",
+    ["Mahogany Legendary 2014"] = "桃花心木传奇2014",
+    ["Pumpkin Legendary 2014"] = "南瓜传奇2014",
+    ["Pyro Legendary 2014"] = "火焰传奇2014",
+    ["Spiky Legendary 2014"] = "尖刺传奇2014",
+    ["Zhuravel Legendary 2014"] = "Zhuravel传奇2014",
+    ["Showa Gigan Skins"] = "昭和盖刚皮肤",
+    ["Final Wars"] = "最终战役",
+    ["Obsidian Gigan"] = "黑曜石盖刚",
+    ["Parrot Gigan"] = "鹦鹉盖刚",
+    ["Amythest Gigan"] = "紫水晶盖刚",
+    ["Diamond Gigan"] = "钻石盖刚",
+    ["GMK Goji Skins"] = "GMK哥斯拉皮肤",
+    ["Unlock All Kaijus & Skins"] = "解锁所有怪兽与皮肤",
+    ["Combat"] = "战斗",
+    ["Misc"] = "杂项",
+    ["Unlocks"] = "解锁项",
+    ["Ruby Gigan"] = "红宝石盖刚",
+    ["Toy Gigan"] = "玩具盖刚",
+    ["Bald Goji"] = "光头哥斯拉",
+    ["2000 Goji"] = "2000版哥斯拉",
+    ["Cerulean Goji"] = "青蓝哥斯拉",
+    ["Hazel Goji"] = "榛色哥斯拉",
+    ["Missing Silver Goji"] = "秘银哥斯拉",
+    ["Sinner Goji"] = "罪业哥斯拉",
+    ["Pibble Goji"] = "碎石哥斯拉",
+    ["Power Goji"] = "能量哥斯拉",
+    ["Main Combat"] = "核心战斗",
+    ["Auto Farm"] = "自动刷资源",
+    ["Select Target Player"] = "选择目标玩家",
+    ["Kill Aura"] = "范围击杀",
+    ["Aura Range"] = "击杀范围",
+    ["25 Studs"] = "25单位",
+    ["Visual Transparency"] = "模型透明度",
+    ["Circle Transparency"] = "范围圈透明度",
+    ["50 %"] = "50%",
+    ["Tip"] = "小贴士",
+    ["Use Kill Aura & Auto Farm with Godzilla 2014"] = "搭配2014版哥斯拉使用范围击杀和自动刷资源效果更佳",
+    ["Other"] = "其他功能",
+    ["Anti Stun"] = "免疫眩晕",
+    ["No Cooldown"] = "技能无冷却",
+    ["Regenerate Ultimate"] = "终极技快速充能",
+    ["Beam Stuff"] = "射线相关",
+    ["Enable Beam Hitbox"] = "开启射线碰撞箱",
+    ["Hitbox Size"] = "碰撞箱大小",
+    ["38 x"] = "38倍",
+    ["Hitbox Transparency"] = "碰撞箱透明度",
+    ["0 %"] = "0%",
+    ["Hitbox Color"] = "碰撞箱颜色",
+    ["Blue"] = "蓝色",
+    ["Spam Hits"] = "连续攻击",
+    ["Attack 1"] = "普攻1",
+    ["Attack 2"] = "普攻2",
+    ["Attack 3"] = "普攻3",
+    ["Attack 4"] = "普攻4",
+    ["LC1"] = "连招1",
+    ["LC3"] = "连招3",
+    ["Discord Server"] = "官方社群",
+    ["Copy Discord Link"] = "复制社群链接",
+    ["Zoom Hack"] = "视野缩放",
+    ["Enable Zoom Hack"] = "开启视野缩放",
+    ["Zoom Distance"] = "缩放距离",
+    ["1 %"] = "1%",
+    ["Visuals"] = "视觉辅助",
+    ["Enable ESP"] = "开启玩家透视",
+    ["Speed Hack"] = "移速修改",
+    ["Walk Speed"] = "行走速度",
+    ["Walk Multiplier"] = "行走倍率",
+    ["1x"] = "1倍",
+    ["Run Speed"] = "奔跑速度",
+    ["Run Multiplier"] = "奔跑倍率",
+    ["Server"] = "服务器",
+    ["Anti AFK"] = "防挂机",
+    ["Server Hop"] = "切换服务器",
+    ["Rejoin"] = "重新加入",
+    ["Destruction"] = "界面管理",
+    ["Destroy UI"] = "关闭菜单界面",
+    ["button"] = "点击触发",
+    ["Shoow Rayfield"] = "巨人时代",
+    ["Interface Hidden"] = "界面已隐藏",
+    ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，你可以点击“显示”来重新显示界面。",
+    ["Warning"] = "警告",
+    ["Anti AFK Could ban in some games"] = "防挂机功能在部分游戏中可能导致账号封禁"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    return Translations[text] or text
+end
+
+local translatedElements = {}
+local originalTexts = {}
+
+local function safeTranslateElement(element)
+    if translatedElements[element] then return end
+    local success, err = pcall(function()
+        if element:IsA("TextLabel") or element:IsA("TextButton") or element:IsA("TextBox") then
+            local currentText = element.Text
+            if currentText and currentText ~= "" then
+                if not originalTexts[element] then
+                    originalTexts[element] = currentText
+                end
+                local translatedText = translateText(currentText)
+                if translatedText ~= currentText then
+                    element.Text = translatedText
+                    translatedElements[element] = true
+                end
+            end
+        end
+    end)
+    if not success then return end
+end
+
+local function onTextPropertyChanged(element)
+    if translatedElements[element] then
+        local currentText = element.Text
+        local originalText = originalTexts[element]
+        if currentText == originalText or translateText(currentText) == currentText then
+            translatedElements[element] = nil
+            return
+        end
+        local translatedText = translateText(currentText)
+        if translatedText ~= currentText then
+            element.Text = translatedText
+        end
+    else
+        safeTranslateElement(element)
+    end
+end
+
+local function addSmartListener(parent)
+    parent.DescendantAdded:Connect(function(descendant)
+        task.wait(0.001)
+        safeTranslateElement(descendant)
+        if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+            descendant:GetPropertyChangedSignal("Text"):Connect(onTextPropertyChanged)
+        end
+    end)
+end
+
+local function setupSmartListener()
+    pcall(addSmartListener, game:GetService("CoreGui"))
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        pcall(addSmartListener, player.PlayerGui)
+    end
+end
+
+local function instantTranslate()
+    for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+        safeTranslateElement(gui)
+    end
+    local player = game:GetService("Players").LocalPlayer
+    if player and player:FindFirstChild("PlayerGui") then
+        for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+            safeTranslateElement(gui)
+        end
+    end
+end
+
+-- 优先加载翻译逻辑（0延迟启动）
+setupSmartListener()
+instantTranslate()
+
+-- 后台异步加载外部脚本，不阻塞翻译
+task.spawn(function()
+    local success, err = pcall(function()
+        getgenv().SCRIPT_KEY = "KEYLESS"
+        local scriptUrl = "https://api.jnkie.com/api/v1/luascripts/public/f21e17491f8f995d3064a9fdc23d491ad53ecb4ba9d11dfb1cee19439d2562d2/download"
+        local scriptContent = game:HttpGet(scriptUrl, true)
+        if scriptContent and scriptContent ~= "" then
+            loadstring(scriptContent)()
+        end
+    end)
+    if not success then
+        warn("外部脚本加载失败:", err)
+    end
+end)
+
+-- 短间隔二次检查新元素，确保翻译完整
+task.spawn(function()
+    task.wait(0.5)
+    instantTranslate()
+end)
