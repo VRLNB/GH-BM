@@ -1,5 +1,4 @@
 local Translations = {
-    ["Radium | Age of Titans"] = "镭 | 泰坦纪元",
     ["Main"] = "主要功能",
     ["Skin Changer"] = "皮肤更换器",
     ["Evolved Godzilla Skins"] = "进化哥斯拉皮肤",
