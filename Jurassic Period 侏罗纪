@@ -1,5 +1,5 @@
 local Translations = {
-    ["Teleporter"] = "传送器",
+    ["Teleporter"] = "传送",
     ["Controller Settings"] = "控制器设置",
     ["Environment"] = "环境",
     ["Teleport"] = "传送",
