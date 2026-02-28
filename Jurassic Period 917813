@@ -1,6 +1,5 @@
 local Translations = {
-    ["Jurassic Dinosaur Simulation Script"] = "侏罗纪恐龙模拟脚本",
-    ["Teleporter"] = "传送器",
+    ["Teleporter"] = "传送",
     ["Controller Settings"] = "控制器设置",
     ["Environment"] = "环境",
     ["Teleport"] = "传送",
@@ -29,7 +28,7 @@ local originalTexts = {}
 
 local function safeTranslateElement(element)
     if translatedElements[element] then return end
-    local success, err = pcall(function()
+    pcall(function()
         if element:IsA("TextLabel") or element:IsA("TextButton") or element:IsA("TextBox") then
             local currentText = element.Text
             if currentText and currentText ~= "" then
@@ -44,42 +43,39 @@ local function safeTranslateElement(element)
             end
         end
     end)
-    if not success then
-        warn("翻译元素失败:", element:GetFullName(), err)
-    end
-end
-
-local function onTextPropertyChanged(element)
-    if translatedElements[element] then
-        local currentText = element.Text
-        local originalText = originalTexts[element]
-        if currentText == originalText or translateText(currentText) == currentText then
-            translatedElements[element] = nil
-            return
-        end
-        local translatedText = translateText(currentText)
-        if translatedText ~= currentText then
-            element.Text = translatedText
-        end
-    else
-        safeTranslateElement(element)
-    end
-end
-
-local function addSmartListener(parent)
-    parent.DescendantAdded:Connect(function(descendant)
-        task.wait(0.01)
-        safeTranslateElement(descendant)
-        if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
-            descendant:GetPropertyChangedSignal("Text"):Connect(function()
-                task.wait(0.01)
-                onTextPropertyChanged(descendant)
-            end)
-        end
-    end)
 end
 
 local function setupSmartListener()
+    local function onTextPropertyChanged(element)
+        if translatedElements[element] then
+            local currentText = element.Text
+            local originalText = originalTexts[element]
+            if currentText == originalText or translateText(currentText) == currentText then
+                translatedElements[element] = nil
+                return
+            end
+            local translatedText = translateText(currentText)
+            if translatedText ~= currentText then
+                element.Text = translatedText
+            end
+        else
+            safeTranslateElement(element)
+        end
+    end
+
+    local function addSmartListener(parent)
+        parent.DescendantAdded:Connect(function(descendant)
+            task.wait(0.01)
+            safeTranslateElement(descendant)
+            if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                descendant:GetPropertyChangedSignal("Text"):Connect(function()
+                    task.wait(0.01)
+                    onTextPropertyChanged(descendant)
+                end)
+            end
+        end)
+    end
+
     pcall(addSmartListener, game:GetService("CoreGui"))
     local player = game:GetService("Players").LocalPlayer
     if player and player:FindFirstChild("PlayerGui") then
@@ -100,20 +96,20 @@ local function delayedInitialTranslate()
     end
 end
 
-local success, err = pcall(function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/5TvrK6Yz"))()
-end)
-if not success then
-    warn("加载失败:", err)
-end
-
-task.wait(2)
-setupSmartListener()
-delayedInitialTranslate()
-
 task.spawn(function()
     while true do
         task.wait(3)
         delayedInitialTranslate()
     end
 end)
+
+task.wait(2)
+setupSmartListener()
+delayedInitialTranslate()
+
+local success, err = pcall(function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/5TvrK6Yz"))()
+end)
+if not success then
+    warn("加载失败:", err)
+end
