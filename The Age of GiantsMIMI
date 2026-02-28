@@ -1,4 +1,7 @@
 local Translations = {
+    ["Radium Hub"] = "镭 助手",
+    ["by hentz"] = "骚福瑞😻",
+    ["Rayfield UI"] = "雷菲尔德界面",
     ["Main"] = "主要功能",
     ["Skin Changer"] = "皮肤更换器",
     ["Evolved Godzilla Skins"] = "进化哥斯拉皮肤",
