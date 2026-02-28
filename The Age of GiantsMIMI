@@ -1,5 +1,5 @@
 local Translations = {
-    ["Radium | Age of Titans"] = "MIMI | 泰坦纪元",
+    ["Radium | Age of Titans"] = "镭 | 泰坦纪元",
     ["Main"] = "主要功能",
     ["Skin Changer"] = "皮肤更换器",
     ["Evolved Godzilla Skins"] = "进化哥斯拉皮肤",
@@ -184,17 +184,25 @@ local function addSmartListener(parent)
             descendant:GetPropertyChangedSignal("Text"):Connect(onTextPropertyChanged)
         end
     end)
-end
-
-local function setupSmartListener()
-    pcall(addSmartListener, game:GetService("CoreGui"))
-    local player = game:GetService("Players").LocalPlayer
-    if player and player:FindFirstChild("PlayerGui") then
-        pcall(addSmartListener, player.PlayerGui)
+    -- 额外扫描父级现有元素，防止遗漏已存在的标题
+    for _, desc in ipairs(parent:GetDescendants()) do
+        safeTranslateElement(desc)
     end
 end
 
+local function setupSmartListener()
+    -- 扩大监听范围：覆盖游戏所有UI容器
+    pcall(addSmartListener, game:GetService("CoreGui"))
+    local player = game:GetService("Players").LocalPlayer
+    if player then
+        pcall(addSmartListener, player:WaitForChild("PlayerGui", 5))
+    end
+    -- 针对Rayfield框架的特殊容器（标题大概率在这里）
+    pcall(addSmartListener, game:GetService("StarterGui"))
+end
+
 local function instantTranslate()
+    -- 强制扫描所有关键UI容器，确保标题被抓到
     for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
         safeTranslateElement(gui)
     end
@@ -203,6 +211,9 @@ local function instantTranslate()
         for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
             safeTranslateElement(gui)
         end
+    end
+    for _, gui in ipairs(game:GetService("StarterGui"):GetDescendants()) do
+        safeTranslateElement(gui)
     end
 end
 
@@ -213,20 +224,17 @@ instantTranslate()
 -- 后台异步加载外部脚本，不阻塞翻译
 task.spawn(function()
     local success, err = pcall(function()
-        getgenv().SCRIPT_KEY = "KEYLESS"
-        local scriptUrl = "https://api.jnkie.com/api/v1/luascripts/public/f21e17491f8f995d3064a9fdc23d491ad53ecb4ba9d11dfb1cee19439d2562d2/download"
-        local scriptContent = game:HttpGet(scriptUrl, true)
-        if scriptContent and scriptContent ~= "" then
-            loadstring(scriptContent)()
-        end
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/VRLNB/GH-BM/main/The%20Age%20of%20GiantsMIMI"))()
     end)
     if not success then
         warn("外部脚本加载失败:", err)
     end
 end)
 
--- 短间隔二次检查新元素，确保翻译完整
+-- 多次轮询，彻底避免标题加载延迟问题
 task.spawn(function()
-    task.wait(0.5)
-    instantTranslate()
+    for i = 1, 5 do
+        task.wait(0.2)
+        instantTranslate()
+    end
 end)
