@@ -223,7 +223,7 @@ instantTranslate()
 -- 后台异步加载外部脚本，不阻塞翻译
 task.spawn(function()
     local success, err = pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/VRLNB/GH-BM/main/The%20Age%20of%20GiantsMIMI"))()
+        local scriptUrl = "https://api.jnkie.com/api/v1/luascripts/public/f21e17491f8f995d3064a9fdc23d491ad53ecb4ba9d11dfb1cee19439d2562d2/download"
     end)
     if not success then
         warn("外部脚本加载失败:", err)
