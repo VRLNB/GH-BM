@@ -92,7 +92,6 @@ local Translations = {
     ["Hitbox Size"] = "碰撞箱大小",
     ["38 x"] = "38倍",
     ["Hitbox Transparency"] = "碰撞箱透明度",
-    ["0 %"] = "0%",
     ["Hitbox Color"] = "碰撞箱颜色",
     ["Blue"] = "蓝色",
     ["Spam Hits"] = "连续攻击",
@@ -183,14 +182,18 @@ local function addSmartListener(parent)
             descendant:GetPropertyChangedSignal("Text"):Connect(onTextPropertyChanged)
         end
     end)
+    for _, desc in ipairs(parent:GetDescendants()) do
+        safeTranslateElement(desc)
+    end
 end
 
 local function setupSmartListener()
     pcall(addSmartListener, game:GetService("CoreGui"))
     local player = game:GetService("Players").LocalPlayer
-    if player and player:FindFirstChild("PlayerGui") then
-        pcall(addSmartListener, player.PlayerGui)
+    if player then
+        pcall(addSmartListener, player:WaitForChild("PlayerGui", 5))
     end
+    pcall(addSmartListener, game:GetService("StarterGui"))
 end
 
 local function instantTranslate()
@@ -203,13 +206,14 @@ local function instantTranslate()
             safeTranslateElement(gui)
         end
     end
+    for _, gui in ipairs(game:GetService("StarterGui"):GetDescendants()) do
+        safeTranslateElement(gui)
+    end
 end
 
--- 优先加载翻译逻辑（0延迟启动）
 setupSmartListener()
 instantTranslate()
 
--- 后台异步加载外部脚本，不阻塞翻译
 task.spawn(function()
     local success, err = pcall(function()
         getgenv().SCRIPT_KEY = "KEYLESS"
@@ -217,6 +221,8 @@ task.spawn(function()
         local scriptContent = game:HttpGet(scriptUrl, true)
         if scriptContent and scriptContent ~= "" then
             loadstring(scriptContent)()
+        else
+            warn("外部脚本内容为空，加载失败")
         end
     end)
     if not success then
@@ -224,8 +230,9 @@ task.spawn(function()
     end
 end)
 
--- 短间隔二次检查新元素，确保翻译完整
 task.spawn(function()
-    task.wait(0.5)
-    instantTranslate()
+    for i = 1, 5 do
+        task.wait(0.2)
+        instantTranslate()
+    end
 end)
