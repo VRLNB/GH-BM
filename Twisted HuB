@@ -1,0 +1,153 @@
+--认准qq群聊晓林739736672汉化
+local Translations = {
+    ["Zixy X (all keys"] = "Zixy X（全密钥）",
+    ["Load Arsenal"] = "加载兵工厂可能用不了",
+    ["Load Twisted"] = "加载扭矩",
+    ["Zixy X | Twisted Key System"] = "Zixy X | Twisted 密钥系统",
+    ["Key Input"] = "密钥输入",
+    ["Enter Key"] = "输入密钥",
+    ["Enter your access key..."] = "输入你的访问密钥...",
+    ["Submit Key"] = "提交密钥",
+    ["Copy Key Link"] = "复制密钥链接",
+    ["ESP"] = "透视",
+    ["Movement"] = "移动",
+    ["Visuals"] = "视觉",
+    ["Utilities"] = "实用工具",
+    ["Autofarm"] = "自动采集",
+    ["Player ESP"] = "玩家透视",
+    ["Tornado ESP"] = "龙卷风透视",
+    ["Probe ESP"] = "探测器透视",
+    ["Enable/Disable Fly"] = "启用/禁用飞行",
+    ["Fly Speed"] = "飞行速度",
+    ["50 Studs/s"] = "50 格/秒",
+    ["Infinite Jump"] = "无限跳跃",
+    ["Walk Speed"] = "行走速度",
+    ["16 Studs/s"] = "16 格/秒",
+    ["Freecam Toggle [PC :[]"] = "自由视角切换 [PC :[]",
+    ["Freecam Speed"] = "自由视角速度",
+    ["1 x"] = "1 倍",
+    ["Fullbright"] = "全亮",
+    ["Field of View"] = "视野",
+    ["70 °"] = "70°",
+    ["Select Tornado for TP"] = "选择要传送的龙卷风",
+    ["None"] = "无",
+    ["Spawn Vehicle (Default Truck)"] = "生成载具（默认卡车）",
+    ["Select Tornado for Autofarm"] = "选择自动采集的龙卷风",
+    ["Start Autofarm [EQUIP PROBE]"] = "开始自动采集 [装备探测器]",
+    ["Return Probe"] = "收回探测器"
+}
+
+local function translateText(text)
+    if not text or type(text) ~= "string" then return text end
+    
+    if Translations[text] then
+        return Translations[text]
+    end
+    
+    for en, cn in pairs(Translations) do
+        if text:find(en) then
+            return text:gsub(en, cn)
+        end
+    end
+    
+    return text
+end
+
+local function setupTranslationEngine()
+    local success, err = pcall(function()
+        local oldIndex = getrawmetatable(game).__newindex
+        setreadonly(getrawmetatable(game), false)
+        
+        getrawmetatable(game).__newindex = newcclosure(function(t, k, v)
+            if (t:IsA("TextLabel") or t:IsA("TextButton") or t:IsA("TextBox")) and k == "Text" then
+                v = translateText(tostring(v))
+            end
+            return oldIndex(t, k, v)
+        end)
+        
+        setreadonly(getrawmetatable(game), true)
+    end)
+    
+    if not success then
+        warn("元表劫持失败:", err)
+       
+        local translated = {}
+        local function scanAndTranslate()
+            for _, gui in ipairs(game:GetService("CoreGui"):GetDescendants()) do
+                if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                    pcall(function()
+                        local text = gui.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                gui.Text = translatedText
+                                translated[gui] = true
+                            end
+                        end
+                    end)
+                end
+            end
+            
+            local player = game:GetService("Players").LocalPlayer
+            if player and player:FindFirstChild("PlayerGui") then
+                for _, gui in ipairs(player.PlayerGui:GetDescendants()) do
+                    if (gui:IsA("TextLabel") or gui:IsA("TextButton") or gui:IsA("TextBox")) and not translated[gui] then
+                        pcall(function()
+                            local text = gui.Text
+                            if text and text ~= "" then
+                                local translatedText = translateText(text)
+                                if translatedText ~= text then
+                                    gui.Text = translatedText
+                                    translated[gui] = true
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
+        
+        local function setupDescendantListener(parent)
+            parent.DescendantAdded:Connect(function(descendant)
+                if descendant:IsA("TextLabel") or descendant:IsA("TextButton") or descendant:IsA("TextBox") then
+                    task.wait(0.1)
+                    pcall(function()
+                        local text = descendant.Text
+                        if text and text ~= "" then
+                            local translatedText = translateText(text)
+                            if translatedText ~= text then
+                                descendant.Text = translatedText
+                            end
+                        end
+                    end)
+                end
+            end)
+        end
+        
+        pcall(setupDescendantListener, game:GetService("CoreGui"))
+        local player = game:GetService("Players").LocalPlayer
+        if player and player:FindFirstChild("PlayerGui") then
+            pcall(setupDescendantListener, player.PlayerGui)
+        end
+        
+        while true do
+            scanAndTranslate()
+            task.wait(3)
+        end
+    end
+end
+
+-- 先启动翻译引擎
+setupTranslationEngine()
+
+-- 等待翻译引擎初始化完成
+task.wait(2)
+
+-- 再加载并执行外部脚本
+local success, err = pcall(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/zixypy/zixyx/main/loader.txt"))()
+end)
+
+if not success then
+    warn("加载失败:", err)
+end
