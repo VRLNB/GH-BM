@@ -15,7 +15,7 @@ local Translations = {
     ["Move Speed Factor"] = "移动速度系数",
     ["Workspace Cleanup"] = "工作区清理",
     ["Remove EnvironmentalAssets"] = "移除环境资源",
-    ["Remove InvisibleWalls"] = "移除空气墙"
+    ["Remove InvisibleWalls"] = "移除空气墙",
 }
 
 local function translateText(text)
