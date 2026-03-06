@@ -42,7 +42,7 @@ local Translations = {
     ["Rejoin"] = "重新加入",
     ["Interface Hidden"] = "界面已隐藏",
     ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，点击“显示”可重新调出",
-    ["Show Rayfield"] = "917813👙🥵",
+    ["Show Rayfield"] = "917813👙🥵"
 }
 
 local function translateText(text)
