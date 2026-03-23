@@ -132,7 +132,7 @@ local Translations = {
     ["Interface Hidden"] = "界面已隐藏",
     ["The interface has been hidden, you can unhide the interface by tapping 'Show'."] = "界面已隐藏，你可以点击“显示”来重新显示界面。",
     ["Warning"] = "警告",
-    ["Anti AFK Could ban in some games"] = "防挂机功能在部分游戏中可能导致账号封禁"
+    ["Anti AFK Could ban in some games"] = "防挂机功能在部分游戏中可能导致账号封禁",
 }
 
 local function translateText(text)
