@@ -10,7 +10,6 @@ local Translations = {
     ["Figure Titanosaurus"] = "手办版泰坦龙",
     ["Emin3m Titanosaurus"] = "埃米纳姆泰坦龙",
     ["Bullmark Titanosaurus"] = "公牛马克泰坦龙",
-    ["范围圈透明度"] = "范围圈透明度",
     ["README"] = "使用说明",
     ["For Auto Farm and Kill Aura to work you must select the 4 kaijus:"] = "自动刷怪和杀戮光环功能生效，需选择以下4种怪兽：",
     ["Godzilla 2014"] = "2014版哥斯拉",
